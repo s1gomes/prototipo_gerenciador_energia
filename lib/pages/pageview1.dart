@@ -21,7 +21,7 @@ class _PageView1 extends State<Pageview1> {
     return Scaffold(
       drawer: const Gaveta(),
       appBar: AppBar(
-        title: const Text("Page Hall", 
+        title: const Text("Comodos", 
         style: TextStyle(color: Color.fromARGB(255, 150, 140, 140), fontFamily: 'Raleway'), 
         ),
       ),
@@ -49,9 +49,9 @@ class _PageView1 extends State<Pageview1> {
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem> [
             BottomNavigationBarItem(
-              label: "Reservas",
+              label: "Cadastro",
               icon: 
-              Icon(Icons.restaurant)
+              Icon(Icons.book)
               ),
                BottomNavigationBarItem(
               label: "Acompanhamento",
@@ -59,9 +59,9 @@ class _PageView1 extends State<Pageview1> {
               Icon(Icons.description)
               ),
               BottomNavigationBarItem(
-              label: "Tarefas",
+              label: "Estatística",
               icon: 
-              Icon(Icons.home_work_outlined)
+              Icon(Icons.auto_graph_outlined)
               )
             ],
           

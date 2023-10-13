@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_teste/pages/pageview1.dart';
-import 'package:flutter_application_teste/shared/widgets/app_imagens.dart';
-import 'package:flutter_application_teste/shared/widgets/card_page_login.dart';
-import 'package:flutter_application_teste/shared/widgets/texto_rodape.dart';
+import 'package:gerenciador_energia/pages/pageview1.dart';
+import 'package:gerenciador_energia/shared/widgets/app_imagens.dart';
+import 'package:gerenciador_energia/shared/widgets/card_page_login.dart';
+import 'package:gerenciador_energia/shared/widgets/texto_rodape.dart';
 class TelaLoginEptus extends StatefulWidget {
   const TelaLoginEptus({super.key});
 
@@ -87,42 +87,10 @@ class _TelaLoginEptusState extends State<TelaLoginEptus> {
                               ),
                             ),
                           ),
-                          const Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               Row(
-                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                               children: [
-                                 Icon(Icons.headphones,
-                                     color: Colors.white,
-                                     size: 18),
-                                 Align(
-                                 alignment: Alignment.centerLeft,
-                                 child: Text("Atendimento ao cliente: ",
-                                 textAlign: TextAlign.start,
-                                   style: TextStyle(
-                                     fontWeight: FontWeight.w700,
-                                     fontSize: 12,
-                                     color: Colors.white,
-                                    )
-                                  ),
-                                ),
-                              ]
-                            ),
-                               Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                     TextodoRodape(icone: Icons.location_pin, texto: "Eptus da AMazônia - Boa Vista - RR"),
-                                     TextodoRodape(icone: Icons.telegram_sharp, texto: "(95) 99122-2983 | (95) 3232-3434"),
-                                     TextodoRodape(icone: Icons.phone, texto: "sac@eptusdaamazonia.com.br")
-                                    ],
-                                  )
-                                ],
-                              )
-                            ]
-                          ),
-                        ),
+                        ]
                       ),
+                    ),
+                  ),
                     Positioned(
                       top: altura * 0.20,
                       right: 30,

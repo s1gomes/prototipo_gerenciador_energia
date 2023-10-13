@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_application_teste/data/db_eptuslogin.dart';
-import 'package:flutter_application_teste/data/models/eptus_configuracao_usuario_model.dart';
-import 'package:flutter_application_teste/data/models/eptus_empresa.dart';
-import 'package:flutter_application_teste/data/models/eptus_usuario.dart';
+import 'package:gerenciador_energia/data/db_eptuslogin.dart';
+import 'package:gerenciador_energia/data/models/eptus_configuracao_usuario_model.dart';
+import 'package:gerenciador_energia/data/models/eptus_empresa.dart';
+import 'package:gerenciador_energia/data/models/eptus_usuario.dart';
+import 'package:gerenciador_energia/repositories/eptus_cliente_respository.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_application_teste/repositories/eptus_cliente_respository.dart';
 
 class LoginRepository {
   static late Usuario usuario;

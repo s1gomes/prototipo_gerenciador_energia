@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_teste/data/models/tarefa.dart';
-import 'package:flutter_application_teste/repositories/tarefa_repository.dart';
-import 'package:flutter_application_teste/shared/widgets/subtitulo_nu.dart';
+import 'package:gerenciador_energia/data/models/tarefa.dart';
+import 'package:gerenciador_energia/repositories/tarefa_repository.dart';
+import 'package:gerenciador_energia/shared/widgets/subtitulo_nu.dart';
 
 class TarefaPage extends StatefulWidget {
   const TarefaPage({super.key});

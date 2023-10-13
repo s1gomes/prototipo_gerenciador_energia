@@ -1,5 +1,5 @@
 
-import 'package:gerenciador_energia/models/tarefa.dart';
+import 'package:gerenciador_energia/data/models/tarefa.dart';
 
 class TarefaRepository {
   final List<Tarefa> _tarefas = [];

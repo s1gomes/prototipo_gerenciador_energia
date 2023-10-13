@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_teste/data/models/card_detail_model.dart';
-import 'package:flutter_application_teste/shared/widgets/menu_lateral.dart';
-import 'package:flutter_application_teste/shared/widgets/subtitulo_nu.dart';
+import 'package:gerenciador_energia/data/models/card_detail_model.dart';
+import 'package:gerenciador_energia/shared/widgets/menu_lateral.dart';
+import 'package:gerenciador_energia/shared/widgets/subtitulo_nu.dart';
 
 class CardDetailPage extends StatelessWidget {
   final CardDetail cardDetail;

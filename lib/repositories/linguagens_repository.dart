@@ -1,5 +1,5 @@
 class LinguagensRepository {
   List<String> retornaLinguagens() {
-    return ["Dart","C#","Python","Java","Outras"];
+    return ["120V","220V","127V","Outras"];
   }
 }

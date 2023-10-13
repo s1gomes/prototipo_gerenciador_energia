@@ -16,16 +16,16 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
         ListTile(
           leading: Image.asset(AppImages.mesaCadeiraPreta),
           title: const Text(
-            "Mesas"
+            "Comodos"
           ),
           subtitle: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Quatro cadeiras"
+                "Adicionar comodos"
                 ),
               Text(
-                "Reservar"
+                "Excluir"
               )  
             ],
           ),
@@ -48,16 +48,16 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
          ListTile(
             leading: Image.asset(AppImages.mesaJanela),
           title: const Text(
-            "Mesa de jantar"
+            "Cozinha"
           ),
           subtitle: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Seis cadeiras"
+                "Adicionar eletrodoméstico"
                 ),
               Text(
-                "Reservar"
+                "Excluir"
               )  
             ],
           ),
@@ -80,16 +80,16 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
          ListTile(
            leading: Image.asset(AppImages.duasMesas),
           title: const Text(
-            "Mesas de centro"
+            "Sala"
           ),
           subtitle: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Decorações"
+                "Adicionar eletrodoméstico"
                 ),
               Text(
-                "Reservar"
+                "Excluir"
               )  
             ],
           ),

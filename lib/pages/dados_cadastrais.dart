@@ -13,7 +13,7 @@ class DadosCadastrais extends StatefulWidget {
   @override
   State<DadosCadastrais> createState() => _DadosCadastraisState();
 }
-
+// cadastrar eletrodomestico nao listado
 class _DadosCadastraisState extends State<DadosCadastrais> {
   TextEditingController nomeController = TextEditingController(text: "");
   TextEditingController dataNascController = TextEditingController(text: "");
@@ -43,7 +43,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
       itens.add(
         DropdownMenuItem(
                     value: i,
-                    child: Text(i.toString() + " ano(s)")
+                    child: Text(i.toString() + " dia(s)")
                   ));
     }
     return itens;
@@ -64,22 +64,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
               TextField(
                 controller: nomeController,
               ),
-            const TextLabel(texto: "Data de nascimento"),
-              TextField(
-                controller: dataNascController,
-                readOnly: true,
-                onTap: () async {
-                 var data = await showDatePicker(
-                    context: context, 
-                    initialDate: DateTime(2000, 1, 1), 
-                    firstDate: DateTime(1900, 1, 1), 
-                    lastDate: DateTime.now());
-                  if (data != null) {
-                    dataNascController.text = data.toString();
-                    dataNascimento = data;
-                  }
-                }),
-            const TextLabel(texto: "Nivel de experiência"),
+            const TextLabel(texto: "Dias de Uso"),
             Column(children: 
             niveis.map((nivel) => RadioListTile(
               title: Text(nivel.toString()),
@@ -92,7 +77,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                 });              
               })).toList()
               ),
-            const TextLabel(texto: "Linguagens preferidas"),
+            const TextLabel(texto: "Voltagem"),
             Column(
               children: linguagens.map((linguagem) => CheckboxListTile(
                   title: Text(linguagem),

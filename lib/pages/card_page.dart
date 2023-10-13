@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciador_energia/models/card_detail_model.dart';
+import 'package:gerenciador_energia/data/models/card_detail_model.dart';
 import 'package:gerenciador_energia/pages/card_detail.dart';
 import 'package:gerenciador_energia/repositories/card_detail_repository.dart';
 import 'package:gerenciador_energia/shared/widgets/card_peq_descricao.dart';

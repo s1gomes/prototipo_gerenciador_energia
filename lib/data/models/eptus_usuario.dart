@@ -1,5 +1,6 @@
 
-import 'package:flutter_application_teste/data/models/eptus_configuracao_usuario_model.dart';
+
+import 'package:gerenciador_energia/data/models/eptus_configuracao_usuario_model.dart';
 
 class Usuario {
   String? ida1;

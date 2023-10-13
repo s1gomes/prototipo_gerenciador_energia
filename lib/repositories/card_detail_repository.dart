@@ -1,5 +1,5 @@
 
-import 'package:gerenciador_energia/models/card_detail_model.dart';
+import 'package:gerenciador_energia/data/models/card_detail_model.dart';
 
 class CardDetailRepository {
 
