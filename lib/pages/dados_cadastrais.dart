@@ -64,19 +64,6 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
               TextField(
                 controller: nomeController,
               ),
-            const TextLabel(texto: "Dias de Uso"),
-            Column(children: 
-            niveis.map((nivel) => RadioListTile(
-              title: Text(nivel.toString()),
-              selected: nivelSelecionado == nivel,
-              value: nivel.toString(), 
-              groupValue: nivelSelecionado, 
-              onChanged: (value) {
-                setState(() {
-                  nivelSelecionado = value.toString();  
-                });              
-              })).toList()
-              ),
             const TextLabel(texto: "Voltagem"),
             Column(
               children: linguagens.map((linguagem) => CheckboxListTile(
@@ -94,17 +81,17 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                     }
                   })).toList()
               ),
-              const TextLabel(texto: "Tempo de experiência"),
+              const TextLabel(texto: "Dias de Uso"),
                DropdownButton(
                 value: tempoExperiencia,
                 isExpanded: true,
-                items: returnItens(4), 
+                items: returnItens(7), 
                 onChanged: (value) {
                   setState(() {
                     tempoExperiencia = int.parse(value.toString());
                   });
                 }),
-              TextLabel(texto: "Pretenção salarial. R\$ ${salarioEscolhido.round().toString()}"),
+              TextLabel(texto: "Preço do Watts. R\$ ${salarioEscolhido.round().toString()}"),
               Slider(
                 min: 0, 
                 max: 10000,
@@ -132,27 +119,11 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                           );
                           return;
                 }
-              if (dataNascimento == null) {
-                 ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: 
-                              Text("Quando você nasceu? Preencha o campo Data de nascimento"))
-                          );
-                          return;
-                }
-              if (nivelSelecionado.trim() == '') {
-                 ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: 
-                              Text("Você não tem nível de experiência? Preencha o campo Nível de experiência"))
-                          );
-                          return;
-                }
               if (linguagensSelecionadas.isEmpty) {
                  ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: 
-                              Text("Não programa em nenhuma das linguagens listadas? Selecione a opção Outras"))
+                              Text("Seu eletrodoméstico não tem uma das voltagens listadas? Selecione a opção Outras"))
                           );
                           return;
                 }
@@ -160,7 +131,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                  ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: 
-                              Text("Não começou a programar ainda? Pré-requisito da vaga é mínimo de 1 ano de experiência"))
+                              Text("Escolha os dias de uso."))
                           );
                           return;
                 }
@@ -168,7 +139,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                  ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: 
-                              Text("Quanto você gostaria de receber? Só pra você desejar mesmo"))
+                              Text("Não sabe o preço do Watts? Verifique sua conta de energia."))
                           );
                           return;
                 }
@@ -180,7 +151,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                 ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: 
-                              Text("Usuário cadastrado")));
+                              Text("Eletrodoméstido cadastrado")));
                 setState(() {
                 salvando = false; 
               });

@@ -14,7 +14,7 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
     return ListView(
       children: [
         ListTile(
-          leading: Image.asset(AppImages.mesaCadeiraPreta),
+          leading: Image.asset(AppImages.planta),
           title: const Text(
             "Comodos"
           ),
@@ -46,7 +46,7 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
           ),
         ),
          ListTile(
-            leading: Image.asset(AppImages.mesaJanela),
+            leading: Image.asset(AppImages.cozinha),
           title: const Text(
             "Cozinha"
           ),
@@ -78,7 +78,7 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
           ),
         ),
          ListTile(
-           leading: Image.asset(AppImages.duasMesas),
+           leading: Image.asset(AppImages.sala),
           title: const Text(
             "Sala"
           ),
