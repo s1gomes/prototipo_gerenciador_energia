@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciador_energia/pages/selecionarEletrodomesticos.dart';
 import 'package:gerenciador_energia/shared/widgets/app_imagens.dart';
 
 class ImageAssetsPage extends StatefulWidget {
@@ -16,13 +17,13 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
         ListTile(
           leading: Image.asset(AppImages.planta),
           title: const Text(
-            "Comodos"
+            "Cômodos"
           ),
           subtitle: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Adicionar comodos"
+                "Adicionar cômodos"
                 ),
               Text(
                 "Excluir"
@@ -46,7 +47,7 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
           ),
         ),
          ListTile(
-            leading: Image.asset(AppImages.cozinha),
+            leading: Image.asset(AppImages.cozinha, scale: 5),
           title: const Text(
             "Cozinha"
           ),
@@ -54,7 +55,7 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Adicionar eletrodoméstico"
+                "Adicionar item"
                 ),
               Text(
                 "Excluir"
@@ -78,32 +79,36 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
           ),
         ),
          ListTile(
-           leading: Image.asset(AppImages.sala),
+           leading: Image.asset(AppImages.sala, scale: 5.4),
           title: const Text(
             "Sala"
           ),
-          subtitle: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
+              TextButton(
+              onPressed: () {
+                    Navigator.pushReplacement(
+                        context, 
+                          MaterialPageRoute(
+                            builder: (context) => EletrodomesticosSala()));
+                  },
+              child: const Text(
                 "Adicionar eletrodoméstico"
-                ),
-              Text(
-                "Excluir"
-              )  
+                )),
             ],
           ),
           trailing: PopupMenuButton<String>(
             onSelected:  (menu) {
-              if (menu == "opcao1") {
+              if (menu == "excluir") {
 
               }
             },
             itemBuilder: (BuildContext bc) {
               return <PopupMenuEntry<String>>[
                 const PopupMenuItem<String>(
-                  value: "opcao1",
-                  child: Text("Opção 1"),
+                  value: "excluir",
+                  child: Text("Excluir cômodo"),
                 )
               ];
             },

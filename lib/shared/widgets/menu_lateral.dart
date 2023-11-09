@@ -59,7 +59,7 @@ class _Gaveta extends State<Gaveta> {
                   backgroundColor: Colors.black,
                   child: 
                   Image(
-                    image: AssetImage('assets/images/eptus_logo.jpg'))),
+                    image: AssetImage('assets/images/planta.jpeg'))),
                 accountName: Text("User"), 
                 accountEmail:  Text("Email")),
              ),
@@ -68,7 +68,7 @@ class _Gaveta extends State<Gaveta> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-              child: Text("EPTUS", 
+              child: Text("Gerenciador de energia", 
                 style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w700
@@ -82,7 +82,7 @@ class _Gaveta extends State<Gaveta> {
             ),
             const BotoesMenuLateral(
               rota: DadosCadastrais(), 
-              texto: "Dados cadastrais", 
+              texto: "Cadastrar itens", 
               corIcone: Colors.black, 
               icone: Icons.card_membership),
             const Divider(
@@ -93,42 +93,9 @@ class _Gaveta extends State<Gaveta> {
             ),
             const BotoesMenuLateral(
               rota: Pageview1(), 
-              texto: "Serviços", 
+              texto: "Gerenciamento", 
               corIcone: Colors.black, 
               icone: Icons.api_outlined),
-            const Divider(
-              color: Color.fromARGB(105, 237, 223, 223)
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             const BotoesMenuLateral(
-              rota:  Login(), 
-              texto: "V1 Pagina de Login Eptus", 
-              corIcone: Colors.black, 
-              icone: Icons.login_rounded),
-            const Divider(
-              color: Color.fromARGB(105, 237, 223, 223)
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const BotoesMenuLateral(
-              rota: TelaLoginEptus(), 
-              texto: "Login app Eptus", 
-              corIcone: Colors.black,
-              icone: Icons.login),
-            const Divider(
-              color: Color.fromARGB(105, 237, 223, 223)
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-              const BotoesMenuLateral(
-              rota: NuLogin(), 
-              texto: "Pagina de Login NuInvest", 
-              corIcone: Colors.black, 
-              icone: Icons.food_bank),
             const Divider(
               color: Color.fromARGB(105, 237, 223, 223)
             ),
@@ -145,7 +112,7 @@ class _Gaveta extends State<Gaveta> {
                   children: [
                     Icon(Icons.exit_to_app_rounded),
                     SizedBox(width: 10),
-                    Text("Sair DIO",
+                    Text("Sair",
                     style: TextStyle(
                       fontSize: 16,
                     )),
@@ -158,7 +125,6 @@ class _Gaveta extends State<Gaveta> {
                   builder: (BuildContext bc) {
                       return AlertDialog(
                         alignment: Alignment.centerLeft,
-
                         title: const Text("Sair do aplicativo?"),
                         content: const Wrap(
                           children: [
@@ -173,49 +139,18 @@ class _Gaveta extends State<Gaveta> {
                           signOut();
                         }, child: const Text("Sair"))
                       ],
-                      );
-                  });
-                },
+                    );
+                  }
+                );
+              },
             ),
-            const Divider(
-              color: Color.fromARGB(105, 237, 223, 223)
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             InkWell
-            (
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                width: double.infinity,
-                height: 30,
-                child: const Row(
-                  children: [
-                    Icon(Icons.logout_rounded),
-                    SizedBox(width: 10),
-                    Text("Sair",
-                    style: TextStyle(
-                      fontSize: 16,
-                    )),
-                  ],
-                ),
-              ),
-              onTap: () {
-                signOut();
-                },
-            ),
-            const Divider(
-              color: Color.fromARGB(105, 237, 223, 223)
-            ),
-
           ],
-        
         ),
       );
-  }
+    }
   signOut() {
   Navigator.pushReplacement(context, 
       MaterialPageRoute(
-        builder: (context) => const NuLogin()));
+        builder: (context) => const TelaLoginEptus()));
   }
 }

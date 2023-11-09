@@ -21,7 +21,7 @@ class _PageView1 extends State<Pageview1> {
     return Scaffold(
       drawer: const Gaveta(),
       appBar: AppBar(
-        title: const Text("Comodos", 
+        title: const Text("Cômodos", 
         style: TextStyle(color: Color.fromARGB(255, 150, 140, 140), fontFamily: 'Raleway'), 
         ),
       ),
