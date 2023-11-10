@@ -1,44 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/data/models/eletrodomesticos_sala_model.dart';
+import 'package:gerenciador_energia/pages/image_assets.dart';
 import 'package:gerenciador_energia/shared/widgets/app_imagens.dart';
 import 'package:gerenciador_energia/shared/widgets/menu_lateral.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EletrodomesticosSala extends StatelessWidget {
   EletrodomesticosSala({super.key});
-  
-   final _EletroSala = [
+
+  final Future<SharedPreferences> titulo = SharedPreferences.getInstance();  
+  final Future<SharedPreferences> comodo = SharedPreferences.getInstance();  
+  final Future<SharedPreferences> voltagem = SharedPreferences.getInstance();  
+
+  //  final _EletroSala = [
+  //   EletroSala(
+  //     title: titulo.toString(),
+  //     voltagem: voltagem.toString(),
+  //     comodo: comodo.toString()
+  //   ),
+  // ];
+ final _EletroSala = [
     EletroSala(
-      id: '1',
-      title: 'Televisão',
-      icone: "assets/images/televisao.jpg",
-      voltagem: 120,
-      comodo: 'Sala'
+      comodo: 'Sala',
+      title: 'Ventilador',
+      voltagem: 220,
     ),
     EletroSala(
       comodo: 'Sala',
-      icone: "assets/images/ventilador.jpg",
-      id: '2',
-      title: 'Ventilador',
-      voltagem: 120
+      title: 'Televisão',
+      voltagem: 110,
     ),
   ];
- 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Gaveta(),
-      appBar: AppBar(
+      appBar: AppBar( 
+      actions: [
+          SizedBox(
+            width: 50,
+            height: 50,
+            child: BackButton(
+              onPressed: () => Navigator.pushReplacement(context, 
+                        MaterialPageRoute(
+                          builder: (context) => ImageAssetsPage()) ),
+                      ),
+          ),
+        ], 
         title: const Text('Eletrodomésticos da sala'),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add_to_queue_outlined,
+        ),
+        onPressed: () {
+          showModalBottomSheet(context: context, 
+            builder: (BuildContext bc) {
+              return const Wrap(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: Text("Cadastre seu eletrodoméstico",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500
+
+                    ),
+                    textAlign: TextAlign.center,
+                    )
+                    )
+                  ],
+              );
+          });
+          // Navigator.pushReplacement(
+          //                     context, 
+          //                       MaterialPageRoute(
+          //                         builder: (context) => const showmoda()));
+      }),
       body:
        Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: 
           _EletroSala.map((sala) {
              cordaVoltagem () {
                   if (sala.voltagem > 200) {
-                    return Text(sala.voltagem.toString(),
+                    return Text("${sala.voltagem.toString()} V",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -46,7 +92,7 @@ class EletrodomesticosSala extends StatelessWidget {
                     ),
                     );
                   } else {
-                    return Text(sala.voltagem.toString(),
+                    return Text("${sala.voltagem.toString()} V",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -59,12 +105,6 @@ class EletrodomesticosSala extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    child:  Image.asset(sala.icone.toString(),
-                    height: 50,
-                    width: 50
-                    )
-                  ),
                   Column(
                     children: <Widget>[
                       Text(sala.title,
@@ -78,16 +118,10 @@ class EletrodomesticosSala extends StatelessWidget {
                               fontSize: 16,
                               fontWeight: FontWeight.w500
                             )),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(child: cordaVoltagem())
-                              ],
-                            )
                     ],
-                  )
+                  ),
+                  Container(child: cordaVoltagem())
                 ],
-
               ),
             );
         }).toList()
