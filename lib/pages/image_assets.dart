@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/pages/selecionarEletrodomesticos.dart';
 import 'package:gerenciador_energia/shared/widgets/app_imagens.dart';
+import 'package:gerenciador_energia/shared/widgets/menu_lateral.dart';
 
 class ImageAssetsPage extends StatefulWidget {
   const ImageAssetsPage({super.key});
@@ -13,22 +14,32 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: ListView(
         children: [
           ListTile(
             leading: Image.asset(AppImages.planta),
-            title: const Text(
-              "Cômodos"
-            ),
-            subtitle: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Adicionar cômodos"
+            title: SizedBox(
+              height: 25,
+              child: const Text(
+                "Cômodos"
                   ),
-                Text(
-                  "Excluir"
-                )  
+            ),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                
+                TextButton(
+
+                onPressed: () {
+                      Navigator.pushReplacement(
+                          context, 
+                            MaterialPageRoute(
+                              builder: (context) => EletrodomesticosSala()));
+                    },
+                child: const Text(
+                  "Adicionar cômodos"
+                  )),
               ],
             ),
             trailing: PopupMenuButton<String>(
@@ -52,15 +63,19 @@ class _ImageAssetsPageState extends State<ImageAssetsPage> {
             title: const Text(
               "Cozinha"
             ),
-            subtitle: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "Adicionar item"
-                  ),
-                Text(
-                  "Excluir"
-                )  
+                TextButton(
+                onPressed: () {
+                      Navigator.pushReplacement(
+                          context, 
+                            MaterialPageRoute(
+                              builder: (context) => EletrodomesticosSala()));
+                    },
+                child: const Text(
+                  "Adicionar eletrodoméstico"
+                  )),
               ],
             ),
             trailing: PopupMenuButton<String>(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/pages/card_page.dart';
 import 'package:gerenciador_energia/pages/image_assets.dart';
+import 'package:gerenciador_energia/pages/placeholder_estatistica.dart';
+import 'package:gerenciador_energia/pages/selecionarEletrodomesticos.dart';
 import 'package:gerenciador_energia/pages/tarefa_page.dart';
 import 'package:gerenciador_energia/shared/widgets/menu_lateral.dart';
 
@@ -36,10 +38,10 @@ class _PageView1 extends State<Pageview1> {
                     _selectedIndex = value;
                   });
                 },
-                children: const [
-                  ImageAssetsPage(),
-                  CardPage(),
-                  TarefaPage()
+                children:  [
+                  const ImageAssetsPage(),
+                  const CardPage(),
+                  PlaceholderEstatistica()
                 ],
               ),
             ),

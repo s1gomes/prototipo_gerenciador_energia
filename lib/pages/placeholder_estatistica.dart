@@ -6,8 +6,8 @@ import 'package:gerenciador_energia/shared/widgets/app_imagens.dart';
 import 'package:gerenciador_energia/shared/widgets/menu_lateral.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class EletrodomesticosSala extends StatelessWidget {
-  EletrodomesticosSala({super.key});
+class PlaceholderEstatistica extends StatelessWidget {
+  PlaceholderEstatistica({super.key});
 
   final Future<SharedPreferences> titulo = SharedPreferences.getInstance();  
   final Future<SharedPreferences> comodo = SharedPreferences.getInstance();  
@@ -36,20 +36,7 @@ class EletrodomesticosSala extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( 
-      actions: [
-          SizedBox(
-            width: 50,
-            height: 50,
-            child: BackButton(
-              onPressed: () => Navigator.pushReplacement(context, 
-                        MaterialPageRoute(
-                          builder: (context) => Pageview1()) ),
-                      ),
-          ),
-        ], 
-        title: const Text('Eletrodomésticos da sala'),
-      ),
+      
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add_to_queue_outlined,
         ),
@@ -80,10 +67,12 @@ class EletrodomesticosSala extends StatelessWidget {
           //                         builder: (context) => const showmoda()));
       }),
       body:
+      
        Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: 
           _EletroSala.map((sala) {
+            
              cordaVoltagem () {
                   if (sala.voltagem > 200) {
                     return Text("${sala.voltagem.toString()} V",
@@ -104,11 +93,15 @@ class EletrodomesticosSala extends StatelessWidget {
                   }
                  }
             return Card(
+
               child: Row(
+                
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Column(
+                    
                     children: <Widget>[
+                      Text("Placeholder"),
                       Text(sala.title,
                           style: const TextStyle(
                               fontSize: 19,
