@@ -13,5 +13,6 @@ class AppImages {
   static String get cabecalhoLogin => "assets/images/PartecimaLogin.png";
   static String get ventilador => "assets/images/ventilador.jpg";
   static String get televisao => "assets/images/televisao.jpg";
-  static String get grafico1 => "assets/images/grafico1/png";
+  static String get grafico1 => "assets/images/grafico1.png";
+  static String get grafico2 => "assets/images/grafico2.png";
 }
