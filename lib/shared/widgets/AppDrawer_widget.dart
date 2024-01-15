@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
 
 class AppDrawerWidget extends StatelessWidget {
-  const AppDrawerWidget({super.key, required this.title});
-  final String title;
+  const AppDrawerWidget({super.key});
+  
 
   @override
   Widget build(BuildContext context) {

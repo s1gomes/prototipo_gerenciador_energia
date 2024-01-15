@@ -78,12 +78,12 @@ flutter:
         - asset: assets/google_fonts/Raleway-Regular.ttf
     - family: RobotoCondensed
       fonts:
-        - asset: assets/fonts/RobotoCondensed-Bold.ttf
+        - asset: assets/google_fonts/RobotoCondensed-Bold.ttf
           weight: 700
-        - asset: assets/fonts/RobotoCondensed-Italic.ttf
+        - asset: assets/google_fonts/RobotoCondensed-Italic.ttf
           weight: 300
-        - asset: assets/fonts/RobotoCondensed-Light.ttf
-        - asset: assets/fonts/RobotoCondensed-Regular.ttf
+        - asset: assets/google_fonts/RobotoCondensed-Light.ttf
+        - asset: assets/google_fonts/RobotoCondensed-Regular.ttf
           style: italic 
   #
   # For details regarding fonts from package dependencies,

@@ -22,13 +22,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: const HomePage(),
+      home: const HomePage(),
       title: 'Gerenciador de energia',
       theme: ThemeData(
           primarySwatch: MyApp.green,
           canvasColor: const Color.fromRGBO(255, 254, 229, 1),
           colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 227, 201, 194)),
+            error: Colors.red,
+              seedColor: const Color.fromARGB(255, 227, 201, 194),
+              ),
+
           useMaterial3: true,
           textTheme: ThemeData.light().textTheme.copyWith(
               titleSmall: const TextStyle(
