@@ -7,8 +7,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Gerenciador de energia")),
-        drawer: AppDrawerWidget(),
         body: Column(
           children: [
             Card(
@@ -52,6 +50,7 @@ class HomePage extends StatelessWidget {
                 )),
             Card()
           ],
-        ));
+        )
+        );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/pages/home_page.dart';
+import 'package:gerenciador_energia/pages/tabs_page.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -22,14 +23,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const TabsScreen(),
       title: 'Gerenciador de energia',
       theme: ThemeData(
           primarySwatch: MyApp.green,
-          canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+          canvasColor: Color.fromARGB(255, 70, 210, 49),
+          cardColor: Color.fromARGB(255, 89, 233, 67),
           colorScheme: ColorScheme.fromSeed(
             error: Colors.red,
-              seedColor: const Color.fromARGB(255, 227, 201, 194),
+            seedColor: Color.fromARGB(255, 213, 227, 210),
+            background: Color.fromARGB(255, 242, 247, 241),
               ),
 
           useMaterial3: true,
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
                   fontSize: 20, fontFamily: 'RobotoCondensed'))),
 
         routes: {
-          AppRoutes.HOME: (ctx) => HomePage(),
+          AppRoutes.HOME: (ctx) => TabsScreen(),
           // AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailPage(),
           // AppRoutes.CART: (ctx) => CartPage(),
           // AppRoutes.ORDERS: (ctx) => OrdersPage(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ComodosCadastros extends StatelessWidget {
-  const ComodosCadastros({super.key});
+class EstatisticaPage extends StatelessWidget {
+  const EstatisticaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ComodosCadastros extends StatelessWidget {
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "Cadastrar comodos",
+                          "Estatística",
                           style: TextStyle(
                             fontSize: 17,
                           ),
@@ -40,7 +40,7 @@ class ComodosCadastros extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "Ainda não há comodos cadastrados",
+                    "Ainda não há dados para análise",
                     style: TextStyle(
                       fontSize: 17,
                     ),

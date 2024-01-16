@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/pages/cadastramento_comodo_page.dart';
-import 'package:gerenciador_energia/pages/estatistica.dart';
+import 'package:gerenciador_energia/pages/estatistica_page.dart';
 import 'package:gerenciador_energia/pages/home_page.dart';
 import 'package:gerenciador_energia/shared/widgets/AppDrawer_widget.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
@@ -22,6 +22,7 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     super.initState();
     _screens = [
+       {'title': 'Gerenciador', 'screen': HomePage()},
        {'title': 'Cadastro', 'screen': ComodosCadastros()},
        {'title': 'Estatística', 'screen': EstatisticaPage()},
     // {'title': 'Meus favoritos', 'screen': FavoriteScreen(favoriteMeals: widget.favoriteMeals)}
@@ -40,18 +41,23 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_screens[_selectedScreenIndex]['screen'].toString()),
+        title: Text(_screens[_selectedScreenIndex]['title'].toString()),
       ),
       drawer: const AppDrawerWidget(),
       body: _screens[_selectedScreenIndex]['screen'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).cardColor,
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.amber,
         currentIndex: _selectedScreenIndex,
         type: BottomNavigationBarType.shifting,
         items: [
+           BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.lightbulb),
+            label: 'Gerenciar'
+            ),
            BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.add),
@@ -61,7 +67,7 @@ class _TabsScreenState extends State<TabsScreen> {
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.bar_chart),
             label: 'Estatística'
-            )
+            ),
         ],
       ),
     );
