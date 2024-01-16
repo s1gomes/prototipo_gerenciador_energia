@@ -23,7 +23,6 @@ class _TabsScreenState extends State<TabsScreen> {
     super.initState();
     _screens = [
        {'title': 'Gerenciador', 'screen': HomePage()},
-       {'title': 'Cadastro', 'screen': ComodosCadastros()},
        {'title': 'Estatística', 'screen': EstatisticaPage()},
     // {'title': 'Meus favoritos', 'screen': FavoriteScreen(favoriteMeals: widget.favoriteMeals)}
     ];
@@ -57,11 +56,6 @@ class _TabsScreenState extends State<TabsScreen> {
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.lightbulb),
             label: 'Gerenciar'
-            ),
-           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.add),
-            label: 'Cadastrar'
             ),
            BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,

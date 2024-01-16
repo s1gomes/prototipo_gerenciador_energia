@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciador_energia/pages/home_page.dart';
+import 'package:gerenciador_energia/pages/cadastramento_comodo_page.dart';
+import 'package:gerenciador_energia/pages/estatistica_page.dart';
 import 'package:gerenciador_energia/pages/tabs_page.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
   static MaterialColor green =
       const MaterialColor(_greenPrimaryValue, <int, Color>{
@@ -20,6 +21,13 @@ class MyApp extends StatelessWidget {
   static const int _greenPrimaryValue = 0xFF2E7D32;
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  // List<Comodos> todosComodos = comodosCategorias;
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -27,8 +35,8 @@ class MyApp extends StatelessWidget {
       title: 'Gerenciador de energia',
       theme: ThemeData(
           primarySwatch: MyApp.green,
-          canvasColor: Color.fromARGB(255, 70, 210, 49),
-          cardColor: Color.fromARGB(255, 89, 233, 67),
+          canvasColor: Color.fromARGB(255, 195, 239, 189),
+          cardColor: Color.fromARGB(255, 201, 232, 196),
           colorScheme: ColorScheme.fromSeed(
             error: Colors.red,
             seedColor: Color.fromARGB(255, 213, 227, 210),
@@ -42,6 +50,8 @@ class MyApp extends StatelessWidget {
 
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
+          AppRoutes.CADASTROCOMODO: (ctx) => ComodosCadastros(),
+          AppRoutes.ESTATISTICA: (ctx) => EstatisticaPage(),
           // AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailPage(),
           // AppRoutes.CART: (ctx) => CartPage(),
           // AppRoutes.ORDERS: (ctx) => OrdersPage(),
