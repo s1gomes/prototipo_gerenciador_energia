@@ -1,11 +1,71 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:gerenciador_energia/pages/iconButtoncadastramento_comodo_page.dart';
-import 'package:gerenciador_energia/shared/widgets/gridView_comodos.dart';
-import 'package:gerenciador_energia/utils/app_routes.dart';
+import 'dart:io';
+import 'dart:math';
 
-class HomePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:gerenciador_energia/models/comodos.dart';
+import 'package:gerenciador_energia/pages/homepage/cadasstrar_iconButton_comodo_page.dart';
+import 'package:gerenciador_energia/shared/widgets/views/gridView_comodos.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+//  List<Comodos> get _newComodos {
+//     return _comodos.where((comodo) {
+//       return comodo.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+//     }).toList();
+//   }
+
+  _addComodo(String nome, String urlImage) {
+    final newTransaction = Comodos(
+        id: Random().nextDouble().toString(), nome: nome, urlImagem: urlImage);
+    setState(() {
+      _comodos.add(newTransaction);
+    });
+  }
+
+  _deleteComodo(String id) {
+    setState(() {
+      _comodos.removeWhere((comodo) => comodo.id == id);
+    });
+  }
+
+  final List<Comodos> _comodos = [];
+  bool _showChart = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  _openCadastroComodo(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return IconButtonComodosCadastros(onSubmit: _addComodo);
+        });
+  }
+
+  Widget _getIconButton(IconData icon, Function() fn) {
+    return Platform.isIOS
+        ? GestureDetector(onTap: fn, child: Icon(icon))
+        : IconButton(icon: Icon(icon), onPressed: fn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +99,7 @@ class HomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const IconButtonComodosCadastros()),
+                            IconButtonComodosCadastros(onSubmit: _addComodo)),
                   );
                 },
                 icon: const Icon(Icons.add),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciador_energia/pages/cadastramento_comodo_page.dart';
+import 'package:gerenciador_energia/pages/homepage/gerenciar_comodo_page.dart';
 import 'package:gerenciador_energia/pages/estatistica_page.dart';
 import 'package:gerenciador_energia/pages/tabs_page.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
