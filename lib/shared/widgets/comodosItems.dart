@@ -8,7 +8,7 @@ class ComodoItem extends StatelessWidget {
 
   void _selectComodo(BuildContext context) {
     Navigator.of(context)
-        .pushNamed(AppRoutes.CADASTROCOMODO, arguments: comodo);
+        .pushNamed(AppRoutes.GERENCIARCOMODO, arguments: comodo);
   }
 
   @override

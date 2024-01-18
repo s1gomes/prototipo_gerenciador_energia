@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciador_energia/pages/homepage/cadastrar_iconButton_comodo_page.dart';
 import 'package:gerenciador_energia/pages/homepage/gerenciar_comodo_page.dart';
 import 'package:gerenciador_energia/pages/estatistica_page.dart';
 import 'package:gerenciador_energia/pages/tabs_page.dart';
@@ -50,7 +51,8 @@ class _MyAppState extends State<MyApp> {
 
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
-          AppRoutes.CADASTROCOMODO: (ctx) => ComodosCadastros(),
+          AppRoutes.GERENCIARCOMODO: (ctx) => GerenciarComodosPage(),
+          // AppRoutes.CADASTROCOMODO: (ctx) => CadastroComodosPage(),
           AppRoutes.ESTATISTICA: (ctx) => EstatisticaPage(),
           // AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailPage(),
           // AppRoutes.CART: (ctx) => CartPage(),
