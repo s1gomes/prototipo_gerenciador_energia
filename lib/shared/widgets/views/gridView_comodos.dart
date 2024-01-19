@@ -9,6 +9,7 @@ class GridViewComodos extends StatelessWidget {
     required this.comodos,
   });
   final List<Comodos> comodos;
+  // final List<Map<String, dynamic>>> comodos;
 
   @override
   Widget build(BuildContext context) {

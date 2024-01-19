@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciador_energia/data/db/db.dart';
 import 'package:gerenciador_energia/pages/homepage/home_page.dart';
 import 'package:gerenciador_energia/shared/widgets/AppDrawer_widget.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeButton.dart';
@@ -9,12 +10,10 @@ class CadastroComodosPage extends StatefulWidget {
   final void Function(String, String) onSubmit;
 
   @override
-  State<CadastroComodosPage> createState() =>
-      _CadastroComodosPageState();
+  State<CadastroComodosPage> createState() => _CadastroComodosPageState();
 }
 
-class _CadastroComodosPageState
-    extends State<CadastroComodosPage> {
+class _CadastroComodosPageState extends State<CadastroComodosPage> {
   final titleController = TextEditingController();
   final imageUrController = TextEditingController();
 
@@ -89,15 +88,16 @@ class _CadastroComodosPageState
                           child: Container(
                             height: 200,
                             width: double.infinity,
-                            child: Image.asset(imageUrController.text,
-                                fit: BoxFit.fill, 
-                                errorBuilder: (context, error, stackTrace) {
+                            child: Image.asset(
+                              imageUrController.text,
+                              fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) {
                                 return Image.asset(
                                   "assets/images/product_image_not_available.png",
-                                  
                                   fit: BoxFit.cover,
                                 );
-                              },),
+                              },
+                            ),
                           ),
                         )
                       : Column(
@@ -106,12 +106,12 @@ class _CadastroComodosPageState
                             adaptativeTextField(
                                 keyboardType: TextInputType.text,
                                 controller: titleController,
-                                onSubmitted: (_) => _submitForm(),
+                                // onSubmitted: (_) => _submitForm(),
                                 label: 'Nome: '),
                             adaptativeTextField(
                                 keyboardType: TextInputType.text,
                                 controller: imageUrController,
-                                onSubmitted: (_) => _submitForm(),
+                                // onSubmitted: (_) => _submitForm(),
                                 label: 'Url da imagem'),
                             // implementar dropdown com imagens fixas de eletrodomésticos
                             SizedBox(height: constraints.maxHeight * 0.02),
@@ -121,56 +121,72 @@ class _CadastroComodosPageState
                                 AdaptativeButton(
                                   label: 'Criar cômodo',
                                   onPressed: () async {
-                                    await _submitForm().then(setState(
-                                      () {
-                                        hasComodo = true;
+                                    await ComodoBancodeDados.instance
+                                        .salvarComodos(titleController.text,
+                                            imageUrController.text)
+                                        .then(
+                                      (value) {
+                                        setState(() {
+                                          hasComodo = true;
+                                        });
                                       },
-                                    ));
+                                    );
+
+                                    // await _submitForm().then(setState(
+                                    //   () {
+                                    //     hasComodo = true;
+                                    //   },
+                                    // ));
                                   },
                                 ),
                               ],
                             ),
-                            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        labelText: 'Url da imagem',
-                        labelStyle: const TextStyle(fontSize: 18),
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor))),
-                    // focusNode: _imageURLFocus,
-                    controller: imageUrController,
-                    textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (_) => _submitForm(),
-                  ),
-                ),
-                Container(
-                    height: 100,
-                    width: 100,
-                    margin: const EdgeInsets.only(top: 10, left: 10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1),
-                    ),
-                    alignment: Alignment.center,
-                    child: imageUrController.text.isEmpty
-                        ? Text('Informe a Url')
-                        : FittedBox(
-                            child: Image.network(
-                              imageUrController.text,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  "assets/images/product_image_not_available.png",
-                                  fit: BoxFit.cover,
-                                );
-                              },
-                            ),
-                          ))
-              ],
-            ),
+                            // Row(
+                            //   crossAxisAlignment: CrossAxisAlignment.end,
+                            //   children: [
+                            //     Expanded(
+                            //       child: TextFormField(
+                            //         decoration: InputDecoration(
+                            //             labelText: 'Url da imagem',
+                            //             labelStyle:
+                            //                 const TextStyle(fontSize: 18),
+                            //             enabledBorder: UnderlineInputBorder(
+                            //                 borderSide: BorderSide(
+                            //                     color: Theme.of(context)
+                            //                         .primaryColor))),
+                            //         // focusNode: _imageURLFocus,
+                            //         controller: imageUrController,
+                            //         textInputAction: TextInputAction.done,
+                            //         // onFieldSubmitted: (_) => _submitForm(),
+                            //       ),
+                            //     ),
+                            //     Container(
+                            //         height: 100,
+                            //         width: 100,
+                            //         margin: const EdgeInsets.only(
+                            //             top: 10, left: 10),
+                            //         decoration: BoxDecoration(
+                            //           border: Border.all(
+                            //               color: Colors.grey, width: 1),
+                            //         ),
+                            //         alignment: Alignment.center,
+                            //         child: imageUrController.text.isEmpty
+                            //             ? Text('Informe a Url')
+                            //             : FittedBox(
+                            //                 child: Image.network(
+                            //                   imageUrController.text,
+                            //                   fit: BoxFit.cover,
+                            //                   errorBuilder:
+                            //                       (context, error, stackTrace) {
+                            //                     return Image.asset(
+                            //                       "assets/images/product_image_not_available.png",
+                            //                       fit: BoxFit.cover,
+                            //                     );
+                            //                   },
+                            //                 ),
+                            //               ))
+                            //   ],
+                            // ),
                           ],
                         ),
                 ),
@@ -218,7 +234,6 @@ class _CadastroComodosPageState
                     AdaptativeButton(
                       label: 'Concluir',
                       onPressed: () {
-                        
                         Navigator.pop(
                             context,
                             MaterialPageRoute(

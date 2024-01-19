@@ -1,3 +1,4 @@
+import 'package:gerenciador_energia/models/comodos.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -26,8 +27,8 @@ class ComodoBancodeDados {
   _onCreate(Database db, int version) async {
     await db.execute(
         'CREATE TABLE comodostable (idComodo INTEGER PRIMARY KEY AUTOINCREMENT, nomeComodo TEXT, urlImageComodo TEXT)');
-    await db.execute(
-        'CREATE TABLE eletrodomesticos_table (idEletrodomestico INTEGER PRIMARY KEY AUTOINCREMENT, idComodo INTEGER FOREING KEY, nomeEletrodomestico TEXT, urlImageEletrodomestico TEXT)');
+    // await db.execute(
+    //     'CREATE TABLE eletrodomesticos_table (idEletrodomestico INTEGER PRIMARY KEY AUTOINCREMENT, idComodo INTEGER FOREING KEY, nomeEletrodomestico TEXT, urlImageEletrodomestico TEXT)');
   }
 
   Future<bool> salvarComodos(String nomeComodo, String urlImageComodo) async {
@@ -64,12 +65,12 @@ class ComodoBancodeDados {
     }
   }
 
-  Future atualizar(String porta, String novaUrl) async {
+  Future atualizar(String nomeEletrodomestico, String urlImageEletrodomestico) async {
     Database db = await instance.database;
     try {
       var newMap = db.rawUpdate(
-          'UPDATE dados2 SET porta = ?, url = ? WHERE id = ?',
-          [porta, novaUrl, 1]);
+          'UPDATE comodostable SET nomeEletrodomestico = ?, urlImageEletrodomestico = ? WHERE id = ?',
+          [nomeEletrodomestico, urlImageEletrodomestico, 1]);
       return newMap;
     } catch (e) {
       e.toString();
@@ -81,7 +82,7 @@ class ComodoBancodeDados {
     Database db = await instance.database;
     try {
       List<Map<String, dynamic>> map =
-          await db.rawQuery('SELECT * FROM dados2 WHERE id= $id');
+          await db.rawQuery('SELECT * FROM comodostable WHERE id= $id');
       return map.first;
     } catch (e) {
       e.toString();
@@ -89,11 +90,11 @@ class ComodoBancodeDados {
     return {};
   }
 
-  Future<int> deletarCampo(int id) async {
+  Future<int> deletarCampo(int idComodo) async {
     Database db = await instance.database;
     try {
       int registro =
-          await db.delete('dados2', where: 'id = ?', whereArgs: [id]);
+          await db.delete('comodostable', where: 'idComodo = ?', whereArgs: [idComodo]);
       return registro;
     } catch (e) {
       e.toString();
@@ -104,11 +105,12 @@ class ComodoBancodeDados {
   Future<List<Map<String, dynamic>>> recuperarTodos() async {
     Database db = await instance.database;
     try {
-      var map = await db.rawQuery('SELECT * FROM dados2');
+      var comodosRecuperados = await db.rawQuery('SELECT * FROM comodostable');
 
-      return map;
+      return comodosRecuperados;
     } catch (e) {
       return [];
+
     }
   }
 }
