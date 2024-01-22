@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/data/db/db.dart';
-import 'package:gerenciador_energia/pages/homepage/home_page.dart';
+import 'package:gerenciador_energia/pages/homepage/mainPage/home_pageMP.dart';
 import 'package:gerenciador_energia/shared/widgets/AppDrawer_widget.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeButton.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeTextField.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/cards/eletrodomesticosCard.dart';
-import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/imageGerenciarContainer.dart';
+import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/GerenciarImageContainer.dart';
 
 class GerenciarComodosPage extends StatefulWidget {
   const GerenciarComodosPage(

@@ -14,7 +14,7 @@ class TextCardContainer extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Cômodo $titleController",
+            titleController,
             style: const TextStyle(
               fontSize: 17,
             ),

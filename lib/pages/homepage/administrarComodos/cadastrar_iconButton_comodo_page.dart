@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/data/db/db.dart';
-import 'package:gerenciador_energia/pages/homepage/home_page.dart';
+import 'package:gerenciador_energia/pages/homepage/mainPage/home_pageMP.dart';
 import 'package:gerenciador_energia/shared/widgets/AppDrawer_widget.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeButton.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeTextField.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/cards/eletrodomesticosCard.dart';
-import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/imageGerenciarContainer.dart';
+import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/CadastrarImagemCotainer.dart';
+import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/GerenciarImageContainer.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/texrcardContainers/textCardContainer.dart';
 
 class CadastroComodosPage extends StatefulWidget {
-  const CadastroComodosPage({super.key, required this.onSubmit});
-  final void Function(String, String) onSubmit;
+  const CadastroComodosPage({super.key});
 
   @override
   State<CadastroComodosPage> createState() => _CadastroComodosPageState();
@@ -67,7 +67,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                       ? Card(
                           color: Color.fromARGB(255, 235, 245, 235),
                           elevation: 1,
-                          child: GerenciarImageContainer(
+                          child: CadastrarImageContainer(
                             constraints: constraints,
                             imageController: imageUrlController.text,
                           ))
@@ -77,12 +77,10 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                             adaptativeTextField(
                                 keyboardType: TextInputType.text,
                                 controller: titleController,
-                                // onSubmitted: (_) => _submitForm(),
                                 label: 'Nome: '),
                             adaptativeTextField(
                                 keyboardType: TextInputType.text,
                                 controller: imageUrlController,
-                                // onSubmitted: (_) => _submitForm(),
                                 label: 'Url da imagem'),
                             // implementar dropdown com imagens fixas de eletrodomésticos
                             SizedBox(height: constraints.maxHeight * 0.02),

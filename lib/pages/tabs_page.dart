@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciador_energia/pages/homepage/gerenciar_comodo_page.dart';
+import 'package:gerenciador_energia/pages/homepage/administrarComodos/gerenciar_comodo_page.dart';
 import 'package:gerenciador_energia/pages/estatistica_page.dart';
-import 'package:gerenciador_energia/pages/homepage/home_page.dart';
+import 'package:gerenciador_energia/pages/homepage/mainPage/home_pageMP.dart';
 import 'package:gerenciador_energia/shared/widgets/AppDrawer_widget.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
 
