@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gerenciador_energia/data/db/db.dart';
 import 'package:gerenciador_energia/models/comodos.dart';
 import 'package:gerenciador_energia/pages/homepage/cadastrar_iconButton_comodo_page.dart';
-import 'package:gerenciador_energia/shared/widgets/comodosItems.dart';
-import 'package:gerenciador_energia/shared/widgets/views/gridView_comodos.dart';
-import 'package:gerenciador_energia/utils/app_routes.dart';
+import 'package:gerenciador_energia/pages/homepage/gerenciar_comodo_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum FilterOptions { Deletar, Editar }
 
@@ -19,12 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
-//  List<Comodos> get _newComodos {
-//     return _comodos.where((comodo) {
-//       return comodo.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
-//     }).toList();
-//   }
-
   _addComodo(String nome, String urlImage) {
     final newTransaction = Comodos(
       id: Random().nextDouble().toString(),
@@ -36,10 +28,21 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     });
   }
 
-
-  void _selectComodo(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(AppRoutes.GERENCIARCOMODO, arguments: comodo);
+  void _selectComodo(
+    BuildContext context,
+    comodoImageUrl,
+    comodoNome,
+    comodoId,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => GerenciarComodosPage(
+                comodoId: comodoId,
+                comodoImageUrl: comodoImageUrl,
+                comodoNome: comodoNome,
+              )),
+    );
   }
 
   _deleteComodo(String id) {
@@ -48,31 +51,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     });
   }
 
-  // Comodos(
-  //     id: Random().nextDouble().toString(),
-  //     nome: "Sala",
-  //     urlImagem: "assets/images/sala.jpg"),
-  // Comodos(
-  //     id: Random().nextDouble().toString(),
-  //     nome: "Cozinha",
-  //     urlImagem: "assets/images/cozinha.jpg"),
-  // Comodos(
-  //     id: Random().nextDouble().toString(),
-  //     nome: "Ventilador",
-  //     urlImagem: "assets/images/ventilador.jpg"),
   final List<Comodos> _comodos = [];
-  final List<Comodos> _comodosBanco = [];
-  late Comodos comodo;
-
-  // recuperarComodos() {
-  //   ComodoBancodeDados.instance
-  //   .recuperarTodos().then((value) async {
-  //     _comodosBanco.addAll(value);
-  //   });
-  //   return _comodosBanco;
-  // }
-
-  bool _showChart = false;
 
   @override
   void initState() {
@@ -97,6 +76,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     }
   }
 
+  final Future<SharedPreferences> func = SharedPreferences.getInstance();
+
   _openCadastroComodo(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -113,7 +94,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
           body: Column(
@@ -154,10 +134,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
           ),
           SizedBox(height: constraints.maxHeight * 0.015),
-          // GridViewComodos(comodos: _comodosBanco),
           FutureBuilder(
               future: ComodoBancodeDados.instance.recuperarTodos(),
               builder: (context, snapshot) {
+                var dados = snapshot.data;
                 if (!snapshot.hasData) {
                   return Text('Ainda não há comodos cadastrados');
                 }
@@ -171,10 +151,20 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
                     ),
-                    itemCount: snapshot.data!.length,
+                    itemCount: dados!.length,
                     itemBuilder: (context, index) {
+                      String comodoImageUrl =
+                          dados[index]['urlImageComodo'].toString();
+                      String comodoNome = dados[index]['nomeComodo'].toString();
+                      int comodoId = dados[index]['idComodo'].toInt();
+                      
                       return InkWell(
-                        onTap: () => _selectComodo(context),
+                        onTap: () => _selectComodo(
+                          context,
+                          comodoImageUrl,
+                          comodoNome,
+                          comodoId,
+                        ),
                         splashColor: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(15),
                         child: Container(
@@ -182,8 +172,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                           padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(
-                                    snapshot.data![index]['urlImageComodo']),
+                                image: AssetImage(comodoImageUrl),
                                 fit: BoxFit.fill,
                                 colorFilter: ColorFilter.mode(
                                     Colors.black.withOpacity(0.4),
@@ -205,35 +194,43 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text(
-                                  snapshot.data![index]['nomeComodo'],
+                                  comodoNome,
                                   style: Theme.of(context).textTheme.titleSmall,
                                   textAlign: TextAlign.left,
                                 ),
                                 PopupMenuButton(
-                            // icon: const Icon(Icons.more_vert),
-                            itemBuilder: (_) => [
-                              const PopupMenuItem(
-                                value: FilterOptions.Deletar,
-                                child: Text('Deletar cômodo'),
-                              ),
-                              const PopupMenuItem(
-                                value: FilterOptions.Editar,
-                                child: Text('Editar Cômodo'),
-                              ),
-                            ],
-                            onSelected: (FilterOptions selectedValue) {
-                              setState(() {
-                                if (selectedValue ==
-                                    FilterOptions.Deletar) {
-                                  ComodoBancodeDados.instance.deletarCampo(
-                                      snapshot.data![index]['idComodo']);
-                                } else {
-                                   Navigator.of(context)
-                                  .pushNamed(AppRoutes.GERENCIARCOMODO, arguments: comodo);
-                                }
-                              });
-                            },
-                          ),
+                                  // icon: const Icon(Icons.more_vert),
+                                  itemBuilder: (_) => [
+                                    const PopupMenuItem(
+                                      value: FilterOptions.Deletar,
+                                      child: Text('Deletar cômodo'),
+                                    ),
+                                    // implementar tela de confirmação pra deletar
+                                    const PopupMenuItem(
+                                      value: FilterOptions.Editar,
+                                      child: Text('Editar Cômodo'),
+                                    ),
+                                  ],
+                                  onSelected: (FilterOptions selectedValue) {
+                                    setState(() {
+                                      if (selectedValue ==
+                                          FilterOptions.Deletar) {
+                                        ComodoBancodeDados.instance
+                                            .deletarCampo(comodoId);
+                                      } else {
+                                        // func.then((SharedPreferences func) {
+                                        //   func.setInt("id", comodoId ?? 0);
+                                        // });
+                                        _selectComodo(
+                                          context,
+                                          comodoImageUrl,
+                                          comodoNome,
+                                          comodoId,
+                                        );
+                                      }
+                                    });
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -243,7 +240,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   ),
                 );
               }),
-
           Card(
             elevation: 3,
             child: Row(

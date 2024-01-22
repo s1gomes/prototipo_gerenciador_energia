@@ -65,18 +65,30 @@ class ComodoBancodeDados {
     }
   }
 
-  Future atualizar(String nomeEletrodomestico, String urlImageEletrodomestico) async {
+  Future atualizarComodo(int idcomodo, String nomeComodo, String urlImageComodo) async {
     Database db = await instance.database;
     try {
       var newMap = db.rawUpdate(
-          'UPDATE comodostable SET nomeEletrodomestico = ?, urlImageEletrodomestico = ? WHERE id = ?',
-          [nomeEletrodomestico, urlImageEletrodomestico, 1]);
+          'UPDATE comodostable SET nomeComodo = ?, urlImageComodo = ? WHERE idcomodo = ?',
+          [nomeComodo, urlImageComodo, idcomodo]);
       return newMap;
     } catch (e) {
       e.toString();
     }
     return {};
   }
+  // Future atualizarEletrodomestico(String nomeEletrodomestico, String urlImageEletrodomestico) async {
+  //   Database db = await instance.database;
+  //   try {
+  //     var newMap = db.rawUpdate(
+  //         'UPDATE comodostable SET nomeEletrodomestico = ?, urlImageEletrodomestico = ? WHERE id = ?',
+  //         [nomeEletrodomestico, urlImageEletrodomestico,]);
+  //     return newMap;
+  //   } catch (e) {
+  //     e.toString();
+  //   }
+  //   return {};
+  // }
 
   Future<Map<String, dynamic>> recuperarPorId(int id) async {
     Database db = await instance.database;

@@ -4,6 +4,9 @@ import 'package:gerenciador_energia/pages/homepage/home_page.dart';
 import 'package:gerenciador_energia/shared/widgets/AppDrawer_widget.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeButton.dart';
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeTextField.dart';
+import 'package:gerenciador_energia/shared/widgets/compartmentalization/cards/eletrodomesticosCard.dart';
+import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/imageGerenciarContainer.dart';
+import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/texrcardContainers/textCardContainer.dart';
 
 class CadastroComodosPage extends StatefulWidget {
   const CadastroComodosPage({super.key, required this.onSubmit});
@@ -15,18 +18,7 @@ class CadastroComodosPage extends StatefulWidget {
 
 class _CadastroComodosPageState extends State<CadastroComodosPage> {
   final titleController = TextEditingController();
-  final imageUrController = TextEditingController();
-
-  _submitForm() {
-    final nome = titleController.text;
-    final urlImage = imageUrController.text;
-
-    if (nome.isEmpty || urlImage.isEmpty == null) {
-      return;
-    }
-
-    widget.onSubmit(nome, urlImage);
-  }
+  final imageUrlController = TextEditingController();
 
   bool hasComodo = false;
 
@@ -49,19 +41,9 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                       SizedBox(
                         width: constraints.maxWidth * 0.09,
                       ),
-                      Container(
-                          height: constraints.maxHeight * 0.05,
-                          width: constraints.maxWidth * 0.7,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Cômodo ${titleController.text}",
-                              style: TextStyle(
-                                fontSize: 17,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          )),
+                      TextCardContainer(
+                          constraints: constraints,
+                          titleController: titleController.text),
                       IconButton(
                         onPressed: () {
                           setState(() {
@@ -85,21 +67,10 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                       ? Card(
                           color: Color.fromARGB(255, 235, 245, 235),
                           elevation: 1,
-                          child: Container(
-                            height: 200,
-                            width: double.infinity,
-                            child: Image.asset(
-                              imageUrController.text,
-                              fit: BoxFit.fill,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  "assets/images/product_image_not_available.png",
-                                  fit: BoxFit.cover,
-                                );
-                              },
-                            ),
-                          ),
-                        )
+                          child: GerenciarImageContainer(
+                            constraints: constraints,
+                            imageController: imageUrlController.text,
+                          ))
                       : Column(
                           children: [
                             // futura implementação: listar todos os eletrodomésticos em uma categoria
@@ -110,7 +81,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                 label: 'Nome: '),
                             adaptativeTextField(
                                 keyboardType: TextInputType.text,
-                                controller: imageUrController,
+                                controller: imageUrlController,
                                 // onSubmitted: (_) => _submitForm(),
                                 label: 'Url da imagem'),
                             // implementar dropdown com imagens fixas de eletrodomésticos
@@ -123,7 +94,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                   onPressed: () async {
                                     await ComodoBancodeDados.instance
                                         .salvarComodos(titleController.text,
-                                            imageUrController.text)
+                                            imageUrlController.text)
                                         .then(
                                       (value) {
                                         setState(() {
@@ -131,12 +102,6 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                         });
                                       },
                                     );
-
-                                    // await _submitForm().then(setState(
-                                    //   () {
-                                    //     hasComodo = true;
-                                    //   },
-                                    // ));
                                   },
                                 ),
                               ],
@@ -155,7 +120,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                             //                     color: Theme.of(context)
                             //                         .primaryColor))),
                             //         // focusNode: _imageURLFocus,
-                            //         controller: imageUrController,
+                            //         controller: imageUrlController,
                             //         textInputAction: TextInputAction.done,
                             //         // onFieldSubmitted: (_) => _submitForm(),
                             //       ),
@@ -170,11 +135,11 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                             //               color: Colors.grey, width: 1),
                             //         ),
                             //         alignment: Alignment.center,
-                            //         child: imageUrController.text.isEmpty
+                            //         child: imageUrlController.text.isEmpty
                             //             ? Text('Informe a Url')
                             //             : FittedBox(
                             //                 child: Image.network(
-                            //                   imageUrController.text,
+                            //                   imageUrlController.text,
                             //                   fit: BoxFit.cover,
                             //                   errorBuilder:
                             //                       (context, error, stackTrace) {
@@ -201,32 +166,8 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
 
                 // ),
                 Card(
-                  color: const Color.fromARGB(255, 235, 245, 235),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(width: constraints.maxWidth * 0.04),
-                      Container(
-                        height: constraints.maxHeight * 0.05,
-                        width: constraints.maxWidth * 0.7,
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "Eletrodomésticos",
-                            style: TextStyle(
-                              fontSize: 17,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                ),
+                    color: const Color.fromARGB(255, 235, 245, 235),
+                    child: EletrodomesticosCard(constraints: constraints)),
                 SizedBox(height: constraints.maxHeight * 0.1),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -249,11 +190,3 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
     }));
   }
 }
-
-// Text(
-//                     "Ainda não há cômodos cadastrados",
-//                     style: TextStyle(
-//                       fontSize: 17,
-//                     ),
-//                     textAlign: TextAlign.center,
-                  // ),

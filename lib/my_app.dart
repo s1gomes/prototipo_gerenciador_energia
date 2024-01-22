@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
 
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
-          AppRoutes.GERENCIARCOMODO: (ctx) => GerenciarComodosPage(),
+          // AppRoutes.GERENCIARCOMODO: (ctx) => GerenciarComodosPage(),
           // AppRoutes.CADASTROCOMODO: (ctx) => CadastroComodosPage(),
           AppRoutes.ESTATISTICA: (ctx) => EstatisticaPage(),
           // AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailPage(),
