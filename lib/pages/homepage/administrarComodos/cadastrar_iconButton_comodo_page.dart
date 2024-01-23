@@ -8,6 +8,27 @@ import 'package:gerenciador_energia/shared/widgets/compartmentalization/cards/el
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/CadastrarImagemCotainer.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/GerenciarImageContainer.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/texrcardContainers/textCardContainer.dart';
+import 'package:gerenciador_energia/shared/widgets/dropdownMenus/imageDropdownMenu.dart';
+
+
+enum Imagens {
+  cozinha("cozinha", "assets/images/cozinha.jpg"),
+  duasMesas("duasMesas", "assets/images/duas_mesas.jpg"),
+  graficoBarras("graficoBarras", "assets/images/grafico1.png"),
+  graficoLinha("graficoLinha", "assets/images/grafico2.png"),
+  mesaCadeiraPreta("mesaCadeiraPreta", "assets/images/mesa_cadeira_preta.jpg"),
+  mesaJanela("mesaJanela", "assets/images/mesa_com_janela.jpg"),
+  plantaCasa("plantaCasa", "assets/images/planta.jpeg"),
+  productImageNoAvailable("productImageNoAvailable",
+      "assets/images/product_Fimage_not_available.png"),
+  sala("sala", "assets/images/sala.jpg"),
+  televisao("televisao", "assets/images/televisao.jpg"),
+  ventilador("ventilador", "assets/images/ventilador.jpg");
+
+  const Imagens(this.label, this.url);
+  final String label;
+  final String url;
+}
 
 class CadastroComodosPage extends StatefulWidget {
   const CadastroComodosPage({super.key});
@@ -18,12 +39,15 @@ class CadastroComodosPage extends StatefulWidget {
 
 class _CadastroComodosPageState extends State<CadastroComodosPage> {
   final titleController = TextEditingController();
-  final imageUrlController = TextEditingController();
+  // final imageUrlController = TextEditingController();
 
   bool hasComodo = false;
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController imageController = TextEditingController();
+    Imagens? seletedImage;
+
     return LayoutBuilder(builder: ((context, constraints) {
       return Scaffold(
           appBar: AppBar(
@@ -65,11 +89,11 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                   ),
                   child: hasComodo
                       ? Card(
-                          color: Color.fromARGB(255, 235, 245, 235),
+                          color: const Color.fromARGB(255, 235, 245, 235),
                           elevation: 1,
                           child: CadastrarImageContainer(
                             constraints: constraints,
-                            imageController: imageUrlController.text,
+                            imageController: imageController.text,
                           ))
                       : Column(
                           children: [
@@ -80,10 +104,38 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                 label: 'Nome: '),
                             adaptativeTextField(
                                 keyboardType: TextInputType.text,
-                                controller: imageUrlController,
+                                controller: imageController,
                                 label: 'Url da imagem'),
                             // implementar dropdown com imagens fixas de eletrodomésticos
                             SizedBox(height: constraints.maxHeight * 0.02),
+                            Container(
+                              height: 150,
+                              width: 150,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: DropdownMenu(
+                                    initialSelection: Imagens.plantaCasa,
+                                    controller: imageController,
+                                    requestFocusOnTap: true,
+                                    label: const Text('Cômodo'),
+                                    onSelected: (Imagens? url) {
+                                      setState(() {
+                                        seletedImage = url;
+                                      });
+                                    },
+                                    dropdownMenuEntries: Imagens.values
+                                        .map<DropdownMenuEntry<Imagens>>(
+                                            (Imagens url) {
+                                      return DropdownMenuEntry<Imagens>(
+                                        value: url,
+                                        label: url.label,
+                                        enabled: url.label != 'plantaCasa',
+                                      );
+                                    }).toList()),
+                              ),
+                            ),
+                            //colcoar url selecionado no dropdown pra aparecer no container image
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -92,7 +144,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                   onPressed: () async {
                                     await ComodoBancodeDados.instance
                                         .salvarComodos(titleController.text,
-                                            imageUrlController.text)
+                                            imageController.text)
                                         .then(
                                       (value) {
                                         setState(() {
