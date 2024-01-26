@@ -40,12 +40,8 @@ class _ComodosGridViewState extends State<ComodosGridView> {
             return Text('Ainda não há comodos cadastrados');
           }
           return Padding(
-            padding: const EdgeInsets.only(
-              bottom: 3,
-              left: 15,
-              right: 15,
-              top: 3
-            ),
+            padding:
+                const EdgeInsets.only(bottom: 3, left: 15, right: 15, top: 3),
             child: Container(
               height: widget.constraints.maxHeight * 0.4,
               child: GridView.builder(
@@ -61,7 +57,7 @@ class _ComodosGridViewState extends State<ComodosGridView> {
                       dados[index]['urlImageComodo'].toString();
                   String comodoNome = dados[index]['nomeComodo'].toString();
                   int comodoId = dados[index]['idComodo'].toInt();
-          
+
                   return InkWell(
                     onTap: () => _selectComodo(
                       context,
@@ -76,9 +72,16 @@ class _ComodosGridViewState extends State<ComodosGridView> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(comodoImageUrl),
+                            onError: (exception, stackTrace) {
+                              Image.asset(
+                                "assets/images/product_image_not_available.png",
+                                fit: BoxFit.cover,
+                              );
+                            },
                             fit: BoxFit.fill,
                             colorFilter: ColorFilter.mode(
-                                Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                                Colors.black.withOpacity(0.4),
+                                BlendMode.dstATop),
                           ),
                           borderRadius: BorderRadius.circular(15),
                           gradient: LinearGradient(

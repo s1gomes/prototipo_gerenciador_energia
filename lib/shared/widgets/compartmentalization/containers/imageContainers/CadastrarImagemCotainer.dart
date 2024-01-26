@@ -8,7 +8,7 @@ class CadastrarImageContainer extends StatelessWidget {
     required this.imageController,
   });
   final BoxConstraints constraints;
-  final String imageController;
+  final String? imageController;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class CadastrarImageContainer extends StatelessWidget {
       height: constraints.maxHeight * 0.3,
       width: double.infinity,
       child: Image.asset(
-        imageController,
+        imageController!,
         fit: BoxFit.fill,
         errorBuilder: (context, error, stackTrace) {
           return Image.asset(

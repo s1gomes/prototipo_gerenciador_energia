@@ -6,26 +6,46 @@ import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeButton.
 import 'package:gerenciador_energia/shared/widgets/adaptatives/adaptativeTextField.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/cards/eletrodomesticosCard.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/CadastrarImagemCotainer.dart';
-import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/imageContainers/GerenciarImageContainer.dart';
 import 'package:gerenciador_energia/shared/widgets/compartmentalization/containers/texrcardContainers/textCardContainer.dart';
 import 'package:gerenciador_energia/shared/widgets/dropdownMenus/imageDropdownMenu.dart';
 
+// enum Imagens {
+//   cozinha("cozinha", "assets/images/cozinha.jpg"),
+//   duasMesas("duasMesas", "assets/images/duas_mesas.jpg"),
+//   graficoBarras("graficoBarras", "assets/images/grafico1.png"),
+//   graficoLinha("graficoLinha", "assets/images/grafico2.png"),
+//   mesaCadeiraPreta("mesaCadeiraPreta", "assets/images/mesa_cadeira_preta.jpg"),
+//   mesaJanela("mesaJanela", "assets/images/mesa_com_janela.jpg"),
+//   plantaCasa("plantaCasa", "assets/images/planta.jpeg"),
+//   productImageNoAvailable("productImageNoAvailable",
+//       "assets/images/product_Fimage_not_available.png"),
+//   sala("sala", "assets/images/sala.jpg"),
+//   televisao("televisao", "assets/images/televisao.jpg"),
+//   ventilador("ventilador", "assets/images/ventilador.jpg");
 
-enum Imagens {
-  cozinha("cozinha", "assets/images/cozinha.jpg"),
-  duasMesas("duasMesas", "assets/images/duas_mesas.jpg"),
-  graficoBarras("graficoBarras", "assets/images/grafico1.png"),
-  graficoLinha("graficoLinha", "assets/images/grafico2.png"),
-  mesaCadeiraPreta("mesaCadeiraPreta", "assets/images/mesa_cadeira_preta.jpg"),
-  mesaJanela("mesaJanela", "assets/images/mesa_com_janela.jpg"),
-  plantaCasa("plantaCasa", "assets/images/planta.jpeg"),
-  productImageNoAvailable("productImageNoAvailable",
-      "assets/images/product_Fimage_not_available.png"),
-  sala("sala", "assets/images/sala.jpg"),
-  televisao("televisao", "assets/images/televisao.jpg"),
-  ventilador("ventilador", "assets/images/ventilador.jpg");
+//   const Imagens(this.label, this.url);
+//   final String label;
+//   final String url;
+// }
 
-  const Imagens(this.label, this.url);
+enum ImagensSubstitutas {
+plantaCasa("Planta da Casa", "assets/images/planta.jpeg"),
+productImageNoAvailable("productImageNotAvailable",
+      "assets/images/product_Fimage_not_available.png");
+  
+  const ImagensSubstitutas(this.label, this.url);
+  final String label;
+  final String url;
+}
+
+enum ImagensComodos {
+  cozinha("Cozinha", "assets/images/cozinha.jpg"),
+  mesaCadeiraPreta("Sala de jantar", "assets/images/mesa_cadeira_preta.jpg"),
+  mesaJanela("Varanda", "assets/images/mesa_com_janela.jpg"),
+  plantaCasa("Planta da Casa", "assets/images/planta.jpeg"),
+  sala("Sala", "assets/images/sala.jpg");
+
+  const ImagensComodos(this.label, this.url);
   final String label;
   final String url;
 }
@@ -38,16 +58,27 @@ class CadastroComodosPage extends StatefulWidget {
 }
 
 class _CadastroComodosPageState extends State<CadastroComodosPage> {
+  // ImagensComodos? selectedImage;
+  
+  ImagensComodos? selectedImage = ImagensComodos.plantaCasa;
+  // ImagensSubstitutas? substituteImage; later
+
+  // var selectedImage = ImagensComodos;
+
   final titleController = TextEditingController();
-  // final imageUrlController = TextEditingController();
+  final imageController = TextEditingController();
+
+  // _imagemSelecionada() {
+  //   if (selectedImage == null) {
+  //     selectedImage = ImagensComodos.productImageNoAvailable;
+  //     return selectedImage?.url;
+  //   } 
+  // }
 
   bool hasComodo = false;
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController imageController = TextEditingController();
-    Imagens? seletedImage;
-
     return LayoutBuilder(builder: ((context, constraints) {
       return Scaffold(
           appBar: AppBar(
@@ -59,27 +90,16 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
               children: [
                 Card(
                   elevation: 3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        width: constraints.maxWidth * 0.09,
-                      ),
-                      TextCardContainer(
-                          constraints: constraints,
-                          titleController: titleController.text),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            hasComodo = false;
-                          });
-                        },
-                        icon: const Icon(Icons.edit),
-                      )
-                    ],
-                  ),
+                  child: TextCardContainer(
+                      constraints: constraints,
+                      titleController: "Cômodo " + titleController.text,
+                      functionOnpressed: () {
+                        setState(() {
+                          hasComodo = false;
+                        });
+                      },
+                      iconData: Icons.edit),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 15,
@@ -93,7 +113,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                           elevation: 1,
                           child: CadastrarImageContainer(
                             constraints: constraints,
-                            imageController: imageController.text,
+                            imageController: selectedImage?.url,
                           ))
                       : Column(
                           children: [
@@ -102,40 +122,71 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                 keyboardType: TextInputType.text,
                                 controller: titleController,
                                 label: 'Nome: '),
-                            adaptativeTextField(
-                                keyboardType: TextInputType.text,
-                                controller: imageController,
-                                label: 'Url da imagem'),
+
                             // implementar dropdown com imagens fixas de eletrodomésticos
                             SizedBox(height: constraints.maxHeight * 0.02),
-                            Container(
-                              height: 150,
-                              width: 150,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
-                                child: DropdownMenu(
-                                    initialSelection: Imagens.plantaCasa,
-                                    controller: imageController,
-                                    requestFocusOnTap: true,
-                                    label: const Text('Cômodo'),
-                                    onSelected: (Imagens? url) {
-                                      setState(() {
-                                        seletedImage = url;
-                                      });
-                                    },
-                                    dropdownMenuEntries: Imagens.values
-                                        .map<DropdownMenuEntry<Imagens>>(
-                                            (Imagens url) {
-                                      return DropdownMenuEntry<Imagens>(
-                                        value: url,
-                                        label: url.label,
-                                        enabled: url.label != 'plantaCasa',
-                                      );
-                                    }).toList()),
-                              ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: 150,
+                                    width: 150,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 20),
+                                      child: DropdownMenu(
+                                          initialSelection:
+                                              ImagensComodos.plantaCasa,
+                                          controller: imageController,
+                                          requestFocusOnTap: true,
+                                          label: const Text('Cômodo'),
+                                          onSelected: (ImagensComodos? url) {
+                                            setState(() {
+                                              selectedImage = url;
+                                            });
+                                          },
+                                          dropdownMenuEntries:
+                                              ImagensComodos.values.map<
+                                                      DropdownMenuEntry<
+                                                          ImagensComodos>>(
+                                                  (ImagensComodos url) {
+                                            return DropdownMenuEntry<
+                                                ImagensComodos>(
+                                              value: url,
+                                              label: url.label,
+                                              enabled: url.label !=
+                                                  'Selecionar imagem ',
+                                            );
+                                          }).toList()),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                    height: 110,
+                                    width: 110,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey, width: 1),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: imageController.text.isEmpty
+                                        ? Text('Informe a Url')
+                                        : FittedBox(
+                                            child: Image.asset(
+                                              selectedImage!.url,
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  "assets/images/product_image_not_available.png",
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                            ),
+                                          ))
+                              ],
                             ),
-                            //colcoar url selecionado no dropdown pra aparecer no container image
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -144,7 +195,7 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                                   onPressed: () async {
                                     await ComodoBancodeDados.instance
                                         .salvarComodos(titleController.text,
-                                            imageController.text)
+                                            selectedImage!.url)
                                         .then(
                                       (value) {
                                         setState(() {
@@ -205,16 +256,6 @@ class _CadastroComodosPageState extends State<CadastroComodosPage> {
                           ],
                         ),
                 ),
-                // Card(
-                //   color: Color.fromARGB(255, 235, 245, 235),
-                //   elevation: 1,
-                //   child: Container(
-                //         height: 200,
-                //         width: double.infinity,
-                //         child: Image.asset(comodos.urlImageImagem, fit: BoxFit.fill),
-                //       ),
-
-                // ),
                 Card(
                     color: const Color.fromARGB(255, 235, 245, 235),
                     child: EletrodomesticosCard(constraints: constraints)),

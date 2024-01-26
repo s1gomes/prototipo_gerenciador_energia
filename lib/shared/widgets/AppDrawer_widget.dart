@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciador_energia/pages/login/extendsbasetest.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
 
 class AppDrawerWidget extends StatelessWidget {
@@ -20,6 +21,17 @@ class AppDrawerWidget extends StatelessWidget {
             title: Text('Home'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.shop),
+            title: Text('Home'),
+            onTap: () {
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TestExtends()),
+              );
             },
           ),
           // Divider(),

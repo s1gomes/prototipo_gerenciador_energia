@@ -9,28 +9,28 @@ class EletrodomesticosCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(height: constraints.maxHeight * 0.03),
-                      Container(
-                        height: constraints.maxHeight * 0.060,
-                        width: constraints.maxWidth * 0.75,
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "Eletrodomésticos",
-                            style: TextStyle(
-                              fontSize: 17,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                      ),
-                    ],
-                  );
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        SizedBox(height: constraints.maxHeight * 0.03),
+        Container(
+          height: constraints.maxHeight * 0.04,
+          width: constraints.maxWidth * 0.75,
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "Eletrodomésticos",
+              style: TextStyle(
+                fontSize: 17,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+        ),
+      ],
+    );
   }
 }
