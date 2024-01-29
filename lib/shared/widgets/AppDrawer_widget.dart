@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciador_energia/pages/login/extendsbasetest.dart';
+import 'package:gerenciador_energia/pages/basepage/extendsbasetest.dart';
 import 'package:gerenciador_energia/utils/app_routes.dart';
 
 class AppDrawerWidget extends StatelessWidget {
@@ -30,7 +30,7 @@ class AppDrawerWidget extends StatelessWidget {
             onTap: () {
                Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TestExtends()),
+                MaterialPageRoute(builder: (context) => TextExtends()),
               );
             },
           ),
